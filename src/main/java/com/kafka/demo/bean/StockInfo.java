@@ -1,9 +1,6 @@
-package com.kafka.demo.producer;
+package com.kafka.demo.bean;
 
-import java.io.Serializable;
-
-public class StockInfo implements Serializable {
-
+public class StockInfo {
 
     private static final long serialVersionUID = 4078914681958046159L;
 

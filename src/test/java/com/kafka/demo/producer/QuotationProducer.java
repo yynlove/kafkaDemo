@@ -1,5 +1,7 @@
 package com.kafka.demo.producer;
 
+import com.kafka.demo.bean.StockInfo;
+import com.kafka.demo.mySelf.StockPartitioner;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.jupiter.api.Test;
@@ -34,11 +36,14 @@ public class QuotationProducer {
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,BROKER_LIST);
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+        //引入自定义分区器
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, StockPartitioner.class);
         return properties;
     }
 
 
     private static StockInfo createQuotationInfo(){
+
         final StockInfo stockInfo = new StockInfo();
         Integer stockCode = 60100+ new Random().nextInt(10);
         float random = (float) Math.random();
